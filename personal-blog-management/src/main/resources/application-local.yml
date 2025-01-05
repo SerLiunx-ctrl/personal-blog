@@ -1,0 +1,16 @@
+server:
+  port: 38080
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/personal_blog?autoReconnect=true&characterEncoding=utf8
+    username: root
+    password: 2636257370
+  data:
+    redis:
+      host: localhost
+      port: 6379
+logging:
+  level:
+    com.serliunx.blog: debug

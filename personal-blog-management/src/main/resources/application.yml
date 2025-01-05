@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /management-api
+spring:
+  application:
+    name: management
+  banner:
+    location: other/Banner.txt
+  profiles:
+    active: local
+logging:
+  level:
+    root: info
