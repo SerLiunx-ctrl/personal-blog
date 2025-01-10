@@ -28,4 +28,14 @@ public class ManagementUser {
 	 * 用户密码
 	 */
 	private String password;
+
+	/**
+	 * 手机号
+	 */
+	private String phoneNumber;
+
+	/**
+	 * 邮箱
+	 */
+	private String email;
 }

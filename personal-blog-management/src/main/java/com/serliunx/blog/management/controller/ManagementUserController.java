@@ -1,13 +1,12 @@
 package com.serliunx.blog.management.controller;
 
 import com.serliunx.blog.component.util.web.CommonResponse;
+import com.serliunx.blog.management.controller.vo.ManagementUserCreateVO;
 import com.serliunx.blog.management.entity.ManagementUser;
 import com.serliunx.blog.management.service.ManagementUserService;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 管理后台用户相关接口
@@ -23,8 +22,14 @@ public class ManagementUserController {
 	@Resource
 	private ManagementUserService managementUserService;
 
-	@GetMapping("by-id")
+	@GetMapping("get-by-id")
 	public CommonResponse<ManagementUser> getUser(@RequestParam("id") Long id) {
 		return CommonResponse.success(managementUserService.selectById(id));
+	}
+
+	@PostMapping("create")
+	public CommonResponse<Void> createManagementUser(@RequestBody @Validated ManagementUserCreateVO createVO) {
+		managementUserService.create(createVO);
+		return CommonResponse.success();
 	}
 }

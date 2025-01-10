@@ -8,6 +8,25 @@ spring:
     location: other/Banner.txt
   profiles:
     active: local
+  main:
+    allow-circular-references: true
 logging:
   level:
     root: info
+mybatis-plus:
+  global-config:
+    banner: false
+  configuration:
+    map-underscore-to-camel-case: true
+# 管理后台配置
+management:
+  # 用户相关
+  user:
+    # 用户名最大长度
+    username-max-length: 32
+    # 用户名最小长度
+    username-min-length: 4
+    # 密码最大长度
+    password-max-length: 20
+    # 密码最小长度
+    password-min-length: 8
