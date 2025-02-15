@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
  * 通用异常处理
@@ -33,6 +34,14 @@ public class GlobalExceptionHandler {
 	public CommonResponse<Void> handleUnknownException(Exception e) {
 		log.error("发生未知异常: ", e);
 		return CommonResponse.fail("系统发生未知错误, 请与管理人员取得联系!");
+	}
+
+	/**
+	 * 静态资源访问失败异常
+	 */
+	@ExceptionHandler(NoResourceFoundException.class)
+	public CommonResponse<Void> handleNoResourceFoundException(NoResourceFoundException e) {
+		return CommonResponse.fail("无法访问该资源!");
 	}
 
 	/**

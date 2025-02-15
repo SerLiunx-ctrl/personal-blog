@@ -1,5 +1,6 @@
 package com.serliunx.blog.component.util.web;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -18,14 +19,17 @@ public class CommonResponse<T> {
 	/**
 	 * 消息
 	 */
+	@Schema(description = "响应的消息文本", requiredMode = Schema.RequiredMode.REQUIRED)
 	private final String msg;
 	/**
 	 * 响应码
 	 */
+	@Schema(description = "响应码", requiredMode = Schema.RequiredMode.REQUIRED)
 	private final int code;
 	/**
 	 * 响应数据
 	 */
+	@Schema(description = "响应数据", requiredMode = Schema.RequiredMode.REQUIRED)
 	private final T data;
 
 	/**

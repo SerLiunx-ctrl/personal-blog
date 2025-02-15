@@ -10,9 +10,23 @@ spring:
     active: local
   main:
     allow-circular-references: true
+# 接口文档生成相关配置
+springdoc:
+  swagger-ui:
+    path: /api.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    # 是否启用swagger-ui
+    enabled: true
+  api-docs:
+    path: /v1/api-docs
+    # 是否启用api文档模板, 关闭后无法使用快速导入api文档
+    enabled: true
+# 日志
 logging:
   level:
     root: info
+# mybatis plus配置
 mybatis-plus:
   global-config:
     banner: false

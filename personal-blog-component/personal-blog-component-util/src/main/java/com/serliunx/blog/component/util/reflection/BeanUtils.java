@@ -26,7 +26,9 @@ public final class BeanUtils {
 	 * @param <T> 目标对象类型, 取决于所指定的目标对象类(targetClass)
 	 */
 	public static <T> T toBean(Object src, Class<T> targetClass) {
-		Assert.notNull(src, "src must not be null");
+		if (src == null) {
+			return null;
+		}
 		Assert.notNull(targetClass, "targetClass must not be null");
 
 		try {
