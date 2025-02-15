@@ -71,6 +71,13 @@ public class CommonResponse<T> {
 	/**
 	 * 操作失败
 	 */
+	public static <T> CommonResponse<T> fail(String msg, int code) {
+		return new CommonResponse<T>(msg, code, null);
+	}
+
+	/**
+	 * 操作失败
+	 */
 	public static <T> CommonResponse<T> fail(String msg) {
 		return new CommonResponse<T>(msg, CODE_FAIL, null);
 	}

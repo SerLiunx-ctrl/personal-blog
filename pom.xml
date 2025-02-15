@@ -69,6 +69,12 @@
 
             <!-- ================================第三方依赖================================ -->
 
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.10.0</version>
+            </dependency>
+
             <!-- boot版本, 以这个为基础版本 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

@@ -28,8 +28,7 @@ public class ManagementUserController {
 	}
 
 	@PostMapping("create")
-	public CommonResponse<Void> createManagementUser(@RequestBody @Validated ManagementUserCreateVO createVO) {
-		managementUserService.create(createVO);
-		return CommonResponse.success();
+	public CommonResponse<Long> createManagementUser(@RequestBody @Validated ManagementUserCreateVO createVO) {
+		return CommonResponse.success(managementUserService.create(createVO));
 	}
 }

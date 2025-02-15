@@ -18,6 +18,10 @@ mybatis-plus:
     banner: false
   configuration:
     map-underscore-to-camel-case: true
+# 通用配置
+blog-common:
+  # 是否输出业务异常信息
+  output-service-exception: true
 # 管理后台配置
 management:
   # 用户相关

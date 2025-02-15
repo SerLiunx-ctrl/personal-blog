@@ -2,6 +2,7 @@ package com.serliunx.blog.management.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.serliunx.blog.component.util.exception.ServiceException;
+import com.serliunx.blog.component.util.reflection.BeanUtils;
 import com.serliunx.blog.management.config.ManagementConfiguration;
 import com.serliunx.blog.management.controller.vo.ManagementUserCreateVO;
 import com.serliunx.blog.management.entity.ManagementUser;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ *
  * 管理后台用户服务实现
  *
  * @author <a href="mailto:serliunx@yeah.net">SerLiunx</a>
@@ -50,14 +52,41 @@ public class ManagementUserServiceImpl implements ManagementUserService {
 	}
 
 	@Override
+	public boolean isPhoneNumberInUse(String phoneNumber) {
+		return managementUserMapper.selectCount(new LambdaQueryWrapper<ManagementUser>()
+				.eq(ManagementUser::getPhoneNumber, phoneNumber)
+		) > 0;
+	}
+
+	@Override
+	public boolean isEmailInUse(String email) {
+		return managementUserMapper.selectCount(new LambdaQueryWrapper<ManagementUser>()
+				.eq(ManagementUser::getEmail, email)
+		) > 0;
+	}
+
+	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void create(ManagementUserCreateVO createVO) {
+	public long create(ManagementUserCreateVO createVO) {
 		if (isManagementUserExists(createVO.getUsername())) {
 			throw new ServiceException("该用户名已被使用！");
 		}
 
+		if (isEmailInUse(createVO.getEmail())) {
+			throw new ServiceException("该邮箱已被使用！");
+		}
+
+		if (isPhoneNumberInUse(createVO.getPhoneNumber())) {
+			throw new ServiceException("该手机号已被使用！");
+		}
+
 		// 校验用户名、密码合法性
 		validateBasicInfo(createVO.getUsername(), createVO.getPassword());
+
+		ManagementUser managementUser = BeanUtils.toBean(createVO, ManagementUser.class);
+		managementUserMapper.insert(managementUser);
+
+		return managementUser.getId();
 	}
 
 	/**

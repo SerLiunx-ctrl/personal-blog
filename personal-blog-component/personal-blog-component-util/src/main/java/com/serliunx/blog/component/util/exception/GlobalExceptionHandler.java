@@ -1,9 +1,13 @@
 package com.serliunx.blog.component.util.exception;
 
+import com.serliunx.blog.component.util.config.CommonConfiguration;
 import com.serliunx.blog.component.util.web.CommonResponse;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -18,18 +22,50 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+	@Resource
+	private CommonConfiguration commonConfiguration;
+
+	/**
+	 * 处理未知异常信息
+	 * <li> 请根据日志的输出内容定位异常
+	 */
 	@ExceptionHandler(Exception.class)
 	public CommonResponse<Void> handleUnknownException(Exception e) {
 		log.error("发生未知异常: ", e);
 		return CommonResponse.fail("系统发生未知错误, 请与管理人员取得联系!");
 	}
 
-	@ExceptionHandler(ServiceException.class)
-	public CommonResponse<Void> handleServiceException(ServiceException e) {
-		loggingWarn(e.getMessage());
-		return CommonResponse.fail(e.getMessage());
+	/**
+	 * 请求参数异常
+	 */
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public CommonResponse<Void> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+		loggingWarn("接口参数缺失!");
+		return CommonResponse.fail("请求参数异常!");
 	}
 
+	/**
+	 * 请求参数缺失
+	 */
+	@ExceptionHandler(MissingServletRequestParameterException.class)
+	public CommonResponse<Void> handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+		return CommonResponse.fail("请求参数缺失: " + e.getParameterName());
+	}
+
+	/**
+	 * 自定义业务异常
+	 */
+	@ExceptionHandler(ServiceException.class)
+	public CommonResponse<Void> handleServiceException(ServiceException e) {
+		if (commonConfiguration.isOutputServiceException()) {
+			loggingWarn(e.getMessage());
+		}
+		return CommonResponse.fail(e.getMessage(), e.getCode());
+	}
+
+	/**
+	 * 参数校验失败异常
+	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public CommonResponse<Void> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 		final BindingResult bindingResult = e.getBindingResult();

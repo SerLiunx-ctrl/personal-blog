@@ -1,5 +1,7 @@
 package com.serliunx.blog.component.util.exception;
 
+import lombok.Getter;
+
 /**
  * 业务异常
  *
@@ -7,25 +9,17 @@ package com.serliunx.blog.component.util.exception;
  * @version 1.0.0
  * @since 2025/1/5
  */
-@SuppressWarnings("all")
+@Getter
 public class ServiceException extends RuntimeException {
 
-	public ServiceException() {
+	private final int code;
+
+	public ServiceException(String message, int code) {
+		super(message);
+		this.code = code;
 	}
 
 	public ServiceException(String message) {
-		super(message);
-	}
-
-	public ServiceException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public ServiceException(Throwable cause) {
-		super(cause);
-	}
-
-	public ServiceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
+		this(message, 500);
 	}
 }

@@ -38,10 +38,27 @@ public interface ManagementUserService {
 	boolean isManagementUserExists(String username);
 
 	/**
+	 * 校验手机号是否已被使用
+	 *
+	 * @param phoneNumber	手机号
+	 * @return	已被使用返回真, 否则返回假.
+	 */
+	boolean isPhoneNumberInUse(String phoneNumber);
+
+	/**
+	 * 校验邮箱是否已被使用
+	 *
+	 * @param email	邮箱
+	 * @return 已被使用返回真, 否则返回假.
+	 */
+	boolean isEmailInUse(String email);
+
+	/**
 	 * 创建后台用户
-	 * <li> 用户名唯一
+	 * <li> 用户名、手机号、邮箱唯一
 	 *
 	 * @param createVO 参数
+	 * @return 创建后的用户ID
 	 */
-	void create(ManagementUserCreateVO createVO);
+	long create(ManagementUserCreateVO createVO);
 }
