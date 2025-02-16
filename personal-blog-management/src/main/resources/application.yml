@@ -17,11 +17,11 @@ springdoc:
     tags-sorter: alpha
     operations-sorter: alpha
     # 是否启用swagger-ui
-    enabled: true
+    enabled: false
   api-docs:
     path: /v1/api-docs
     # 是否启用api文档模板, 关闭后无法使用快速导入api文档
-    enabled: true
+    enabled: false
 # 日志
 logging:
   level:
