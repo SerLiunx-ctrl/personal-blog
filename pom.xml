@@ -16,6 +16,8 @@
         <module>personal-blog-portal</module>
         <!-- 技术组件 -->
         <module>personal-blog-component</module>
+        <!-- 核心模块(提供公共API给后台及门户使用) -->
+        <module>personal-blog-core</module>
     </modules>
 
     <properties>

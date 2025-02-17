@@ -1,0 +1,8 @@
+.d8888. d88888b d8888b. db      d888888b db    db d8b   db db    db
+88'  YP 88'     88  `8D 88        `88'   88    88 888o  88 `8b  d8'
+`8bo.   88ooooo 88oobY' 88         88    88    88 88V8o 88  `8bd8'
+  `Y8b. 88~~~~~ 88`8b   88         88    88    88 88 V8o88  .dPYb.
+db   8D 88.     88 `88. 88booo.   .88.   88b  d88 88  V888 .8P  Y8.
+`8888Y' Y88888P 88   YD Y88888P Y888888P ~Y8888P' VP   V8P YP    YP
+
+Powered by Spring Boot ${spring-boot.version}
