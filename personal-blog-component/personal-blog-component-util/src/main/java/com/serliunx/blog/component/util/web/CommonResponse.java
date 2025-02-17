@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @SuppressWarnings("all")
 @RequiredArgsConstructor
-public class CommonResponse<T> {
+public final class CommonResponse<T> {
 
 	/**
 	 * 消息

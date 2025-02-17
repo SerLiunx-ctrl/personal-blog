@@ -89,6 +89,15 @@ public class ManagementUserServiceImpl implements ManagementUserService {
 		return managementUser.getId();
 	}
 
+	@Override
+	public void delete(Long id, boolean checkExists) {
+		if (checkExists &&
+				managementUserMapper.selectById(id) == null) {
+			throw new ServiceException("该用户不存在!");
+		}
+		managementUserMapper.deleteById(id);
+	}
+
 	/**
 	 * 基本信息校验
 	 */

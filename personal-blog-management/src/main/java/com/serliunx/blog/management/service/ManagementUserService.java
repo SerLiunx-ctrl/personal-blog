@@ -1,6 +1,8 @@
 package com.serliunx.blog.management.service;
 
+import com.serliunx.blog.component.util.web.PageResult;
 import com.serliunx.blog.management.controller.vo.ManagementUserCreateVO;
+import com.serliunx.blog.management.controller.vo.ManagementUserVO;
 import com.serliunx.blog.management.entity.ManagementUser;
 
 /**
@@ -61,4 +63,12 @@ public interface ManagementUserService {
 	 * @return 创建后的用户ID
 	 */
 	long create(ManagementUserCreateVO createVO);
+
+	/**
+	 * 删除指定后台用户
+	 *
+	 * @param id			用户ID
+	 * @param checkExists	是否检查用户存在, 启用时如果不存在指定用户即会报错
+	 */
+	void delete(Long id, boolean checkExists);
 }

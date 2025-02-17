@@ -37,4 +37,11 @@ public class ManagementUserController {
 	public CommonResponse<Long> createManagementUser(@RequestBody @Validated ManagementUserCreateVO createVO) {
 		return CommonResponse.success(managementUserService.create(createVO));
 	}
+
+	@PostMapping("delete")
+	@Operation(summary = "删除用户", description = "删除指定ID的后台用户")
+	public CommonResponse<Void> deleteManagementUser(@RequestParam("id") Long id) {
+		managementUserService.delete(id, true);
+		return CommonResponse.success();
+	}
 }
