@@ -32,6 +32,12 @@ mybatis-plus:
     banner: false
   configuration:
     map-underscore-to-camel-case: true
+# 安全模块通用配置信息
+blog-security:
+  # 是否启用身份认证过滤器
+  enable-authentication-filter: true
+  # 是否启用鉴权过滤器
+  enable-common-permission-filter: true
 # 通用配置
 blog-common:
   # 是否输出业务异常信息
